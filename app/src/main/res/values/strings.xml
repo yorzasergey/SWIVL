@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">SWIVL</string>
+
+    <string name="gists_text">Gists:</string>
+    <string name="repos_text">Repos:</string>
+    <string name="followes_text">Followers:</string>
+
+    <string name="url_open_error_message">Не смогли открыть ссылку</string>
+    <string name="error_downloading_profile">Ошибка загрузки данных. \nПовторить</string>
+
+</resources>

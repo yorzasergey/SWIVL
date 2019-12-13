@@ -7,7 +7,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.swivl.tz.model.User;
-import com.swivl.tz.model.UserErrorItem;
 import com.swivl.tz.model.UserListItem;
 import com.swivl.tz.model.UserLoadingItem;
 import com.swivl.tz.userrepository.UserRepository;
@@ -37,9 +36,6 @@ public class UserListViewModel extends AndroidViewModel {
 
         userRepository = UserRepositoryProvider.provideDataRepository();
         disposable = new CompositeDisposable();
-
-        //usersList.add(new UserLoadingItem());
-        //users.setValue(usersList);
 
         fetchUsers();
     }
@@ -73,12 +69,6 @@ public class UserListViewModel extends AndroidViewModel {
 
                     @Override
                     public void onError(Throwable e) {
-
-                        /*if(usersList.size() > 0){
-                            usersList.set(usersList.size() - 1, new UserErrorItem());
-                        } else {
-                            usersList.add(new UserErrorItem());
-                        }*/
 
                         loadError.setValue(true);
                         loading.setValue(false);

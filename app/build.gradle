@@ -28,7 +28,6 @@ android {
     }
 }
 
-def supportVersion = '27.1.1'
 def retrofitVersion = '2.5.0'
 def rxJavaVersion = '2.0.1'
 def butterKnifeVersion = '10.1.0'

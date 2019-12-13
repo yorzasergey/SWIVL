@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.transition.Fade;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,7 +69,6 @@ public class UserListFragment extends Fragment {
 
             getActivity().getSupportFragmentManager()
                     .beginTransaction()
-                    .setReorderingAllowed(true)
                     .addSharedElement(view.findViewById(R.id.userImageView), "avatarImage")
                     .replace(R.id.container, details)
                     .addToBackStack(null)
@@ -85,6 +85,13 @@ public class UserListFragment extends Fragment {
 
     public static UserListFragment newInstance() {
         return new UserListFragment();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        viewModel = ViewModelProviders.of(this).get(UserListViewModel.class);
     }
 
     @Nullable
@@ -149,16 +156,15 @@ public class UserListFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        viewModel = ViewModelProviders.of(this).get(UserListViewModel.class);
-
-        viewModel.getUsers().observe(this, new Observer<List<UserListItem>>() {
+        viewModel.getUsers().observe(getViewLifecycleOwner(), new Observer<List<UserListItem>>() {
             @Override
             public void onChanged(List<UserListItem> users) {
+
                 usersAdapter.setData(users);
             }
         });
 
-        viewModel.getLoading().observe(this, new Observer<Boolean>() {
+        viewModel.getLoading().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean loading) {
 
@@ -168,7 +174,7 @@ public class UserListFragment extends Fragment {
             }
         });
 
-        viewModel.getLoadError().observe(this, new Observer<Boolean>() {
+        viewModel.getLoadError().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean isError) {
 

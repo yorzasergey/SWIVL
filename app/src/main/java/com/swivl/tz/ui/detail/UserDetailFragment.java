@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
+import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -129,6 +130,8 @@ public class UserDetailFragment extends Fragment {
         unbinder = ButterKnife.bind(this, view);
 
         if(interactionListener != null) interactionListener.onChangeActionBarTitle("");
+
+        ViewCompat.setTransitionName(avatarImageView, "avatarImage");
 
         Glide.with(this)
                 .load(urlAvatar)
